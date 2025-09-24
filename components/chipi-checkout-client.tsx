@@ -127,49 +127,72 @@ export default function ChipiCheckoutClient({ hasTransactionHash }: { hasTransac
                     </Card>
                 </section>
 
-                <section className="py-16 lg:col-start-1 lg:row-start-1 lg:max-w-lg lg:pb-24">
-                    <form onSubmit={handleSubmit} className="space-y-10">
-                        <Card>
+            
+
+                {hasTransactionHash ? (
+                  <section className="py-16 lg:col-start-1 lg:row-start-1 lg:max-w-lg lg:pb-24">
+                    <div className="space-y-10">
+                      <h2 className="text-2xl font-bold">Payment Confirmed!</h2>
+                      <Card>
+                        <CardHeader>
+                          <CardTitle>Click to continue to shipping</CardTitle>
+                            <CardDescription>Configure your shipping details and view your order to finalize your purchase</CardDescription>
+                        </CardHeader>
+                        <CardContent className="space-y-3">
+                          <Card >
                             <CardHeader>
-                                <CardTitle>Payment details</CardTitle>
+                              <CardTitle className="text-sm">Shipping and Order Details</CardTitle>
+                            
                             </CardHeader>
-                            <CardContent className="space-y-3">
-                                <Card className="border">
-                                    <CardHeader>
-                                        <CardTitle className="text-sm">External Wallet</CardTitle>
-                                        <CardDescription>Pay securely with USDC</CardDescription>
-                                    </CardHeader>
-                                    <CardContent className="space-y-2">
-                                        <PayWithExternalWalletButton usdAmount={parseFloat(cart.cost.totalAmount.amount) + 0.01} />
-                                    </CardContent>
-                                </Card>
-
-                                <div className="flex items-center my-4">
-                                    <Separator className="flex-1" />
-                                    <span className="mx-4 text-sm text-muted-foreground">Or pay with card</span>
-                                    <Separator className="flex-1" />
-
-                                </div>
-                                <Card className="border">
-                                    <CardHeader>
-                                        <CardTitle className="text-sm">Standard Checkout</CardTitle>
-                                        <CardDescription>Pay with card or PayPal</CardDescription>
-                                    </CardHeader>
-                                    <CardContent className="space-y-2">
-                                        <Button className="w-full bg-blue-600 hover:bg-indigo-700 text-white" onClick={() => redirectToCheckout()}> Shopify Checkout</Button>
-                                    </CardContent>
-                                </Card>
+                            <CardContent className="space-y-2">
+                            <Button className="w-full bg-blue-600 hover:bg-indigo-700 text-white" onClick={() => redirectToCheckout()}>Shipping</Button>
                             </CardContent>
-                        </Card>
-                        {
-                            hasTransactionHash && (
-                                <Button type="submit">
-                                    Continue to Shipping
-                                </Button>
-                            )
-                        }
-                    </form>
-                </section>
+                          </Card>
+
+                          
+                        </CardContent>
+                      </Card>
+                    </div>
+                  </section>
+                ) : (
+                  <section className="py-16 lg:col-start-1 lg:row-start-1 lg:max-w-lg lg:pb-24">
+                    <div className="space-y-10">
+                      <h2 className="text-2xl font-bold">Choose your payment method</h2>
+                      <Card>
+                        <CardHeader>
+                          <CardTitle>Payment details</CardTitle>
+                        </CardHeader>
+                        <CardContent className="space-y-3">
+                          <Card className="border">
+                            <CardHeader>
+                              <CardTitle className="text-sm">External Wallet</CardTitle>
+                              <CardDescription>Pay securely with USDC</CardDescription>
+                            </CardHeader>
+                            <CardContent className="space-y-2">
+                              <PayWithExternalWalletButton usdAmount={parseFloat(cart.cost.totalAmount.amount) + 0.01} />
+                            </CardContent>
+                          </Card>
+
+                          <div className="flex items-center my-4">
+                            <Separator className="flex-1" />
+                            <span className="mx-4 text-sm text-muted-foreground">Or pay with a card</span>
+                            <Separator className="flex-1" />
+                          </div>
+                          <Card className="border">
+                            <CardHeader>
+                              <CardTitle className="text-sm">Standard Checkout</CardTitle>
+                              <CardDescription>Pay with card or PayPal</CardDescription>
+                            </CardHeader>
+                            <CardContent className="space-y-2">
+                              <Button className="w-full bg-blue-600 hover:bg-indigo-700 text-white" onClick={() => redirectToCheckout()}>Shopify Checkout</Button>
+                            </CardContent>
+                          </Card>
+                        </CardContent>
+                      </Card>
+                    </div>
+                  </section>
+                )}
+
             </div>
         </div>
     );
