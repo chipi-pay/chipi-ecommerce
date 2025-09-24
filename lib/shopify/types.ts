@@ -191,6 +191,22 @@ export type ShopifyUpdateCartOperation = {
   };
 };
 
+export type ShopifyCartNoteUpdateOperation = {
+  data: {
+    cartNoteUpdate: {
+      cart: ShopifyCart;
+      userErrors: {
+        field: string[];
+        message: string;
+      }[];
+    };
+  };
+  variables: {
+    cartId: string;
+    note: string;
+  };
+};
+
 export type ShopifyCollectionOperation = {
   data: {
     collection: ShopifyCollection;

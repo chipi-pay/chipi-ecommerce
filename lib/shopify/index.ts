@@ -16,7 +16,8 @@ import {
   addToCartMutation,
   createCartMutation,
   editCartItemsMutation,
-  removeFromCartMutation
+  removeFromCartMutation,
+  updateCartNoteMutation
 } from './mutations/cart';
 import { getCartQuery } from './queries/cart';
 import {
@@ -41,6 +42,7 @@ import {
   Product,
   ShopifyAddToCartOperation,
   ShopifyCart,
+  ShopifyCartNoteUpdateOperation,
   ShopifyCartOperation,
   ShopifyCollection,
   ShopifyCollectionOperation,
@@ -281,6 +283,23 @@ export async function getCart(): Promise<Cart | undefined> {
   }
 
   return reshapeCart(res.body.data.cart);
+}
+
+export async function updateCartNote(note: string): Promise<Cart> {
+  const cartId = (await cookies()).get('cartId')?.value!;
+  const res = await shopifyFetch<ShopifyCartNoteUpdateOperation>({
+    query: updateCartNoteMutation,
+    variables: {
+      cartId,
+      note
+    }
+  });
+
+  if (res.body.data.cartNoteUpdate.userErrors?.length) {
+    throw new Error(res.body.data.cartNoteUpdate.userErrors[0]?.message || 'Unknown error');
+  }
+
+  return reshapeCart(res.body.data.cartNoteUpdate.cart);
 }
 
 export async function getCollection(

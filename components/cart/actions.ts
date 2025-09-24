@@ -6,7 +6,8 @@ import {
   createCart,
   getCart,
   removeFromCart,
-  updateCart
+  updateCart,
+  updateCartNote
 } from 'lib/shopify';
 import { revalidateTag } from 'next/cache';
 import { cookies } from 'next/headers';
@@ -30,6 +31,7 @@ export async function addItem(
 
 export async function removeItem(prevState: any, merchandiseId: string) {
   try {
+    //USE THIS 
     const cart = await getCart();
 
     if (!cart) {
@@ -95,12 +97,28 @@ export async function updateItemQuantity(
   }
 }
 
+export async function redirectToChipiCheckout() {
+  // Redirect to our custom checkout page instead of Shopify's hosted checkout
+  redirect('/checkout');
+}
 export async function redirectToCheckout() {
   let cart = await getCart();
   redirect(cart!.checkoutUrl);
 }
 
+
 export async function createCartAndSetCookie() {
   let cart = await createCart();
+  console.log('Cart created:', cart);
   (await cookies()).set('cartId', cart.id!);
+}
+
+export async function updateCartNoteAction(note: string) {
+  try {
+    await updateCartNote(note);
+    return 'Cart note updated successfully';
+  } catch (e) {
+    console.error('Error updating cart note:', e);
+    return 'Error updating cart note';
+  }
 }
