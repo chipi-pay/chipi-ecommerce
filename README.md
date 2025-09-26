@@ -1,8 +1,9 @@
 # CLICK ON STARKNET'S LOGO TO DEPLOY
-<a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fchipi-pay%2Fchipi-ecommerce&project-name=chipi-ecommerce&repo-name=chipi-ecommerce&env=COMPANY_NAME,SHOPIFY_REVALIDATION_SECRET,SHOPIFY_STORE_DOMAIN,SHOPIFY_STOREFRONT_ACCESS_TOKEN,SITE_NAME" target="_blank" rel="noopener noreferrer">
+<a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fchipi-pay%2Fchipi-ecommerce&project-name=chipi-ecommerce&repo-name=chipi-ecommerce&env=COMPANY_NAME,SHOPIFY_REVALIDATION_SECRET,SHOPIFY_STORE_DOMAIN,SHOPIFY_STOREFRONT_ACCESS_TOKEN,SITE_NAME,NEXT_PUBLIC_MERCHANT_WALLET,NEXT_PUBLIC_URL" 
+   target="_blank" 
+   rel="noopener noreferrer">
   <img src="public/starknet-logo.svg" alt="Chipi Deploy" width="50" />
 </a>
-
 
 # Next.js Commerce
 
